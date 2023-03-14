@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.5">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css" />
+    <link rel="stylesheet" type="text/css" href="css/mainstyles.css" />
+    <link rel="stylesheet" type="text/css" href="css/directory.css" />
+    <link rel="stylesheet" type="text/css" href="css/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>College Campus Nav Display</title>
+    <style>
+        .Container{
+           position: absolute;
+           top: 25%;
+           left: 21.7%;
+           overflow-y: auto;
+           border-radius: 5px;
+           margin: auto;
+           max-height: 53vh;
+       }
+       
+       .Content{
+           height: 40%;
+           padding-right: 30px;
+           color: white;
+           text-align: center;
+       }
+        
+       
+       ::-webkit-scrollbar {
+           width: 60px;
+       }
+    
+      
+       ::-webkit-scrollbar-track {
+           background: #003865;
+           border-radius: 30px;
+       }
+    
+      
+       ::-webkit-scrollbar-thumb {
+           background: #FFCD00;
+           border-radius: 40px;
+       }
+    
+       
+       ::-webkit-scrollbar-thumb:hover {
+           background: #555;
+       }
+       
+       .fixTableHead thead th {
+           position: sticky;
+           top: 0;
+        }
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+       table{
+           font-family:Arial, Helvetica, sans-serif;
+           width: 1150px;
+           margin: auto;
+           table-layout: fixed;
+           text-align: center;
+           margin-top: 0px;
+           height: 0px;
+           color: white;
+           
+       }
+       table, th, td{
+           font-family: Arial, Helvetica, sans-serif;
+           border: 1px transparent;
+           border-collapse: collapse;
+           padding: 12px;
+           font-size: 24px;
+       }
+       
+       th{
+           background: #00A8E1;
+           text-transform: uppercase;
+           font-size: 24px;
+       }
+       tr:nth-child(odd) {
+           background-color: rgba(0, 0, 0, .5);
+           color: #FFF ;
+       }
+       tr:nth-child(even) {
+           background: rgba(0, 56, 101, 0.8);
+       }
+       td:nth-child(5n+4){
+           background-color: rgba(255, 205, 0, 1);
+           font-weight: bold;
+           font-size: 24px;
+       }
+       td:nth-child(5n+3){
+           font-weight: bold;
+           font-size: 24px;
+       }
+       #btn:hover{
+        cursor: pointer;
+       }
+       .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1; 
+            padding-top: 100px; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0, 0, 0, 0.9); 
+        }
+        .modal-content1 {
+            margin: auto;
+            display: block;
+        }
+        .modal-content1, #caption {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+            from {-webkit-transform:scale(0)}
+            to {-webkit-transform:scale(1)}
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0)}
+            to {transform:scale(1)}
+        }
+        #close{
+            position: absolute;
+            top: 7%;
+            right: 11%;
+            color: #f1f1f1;
+            font-size: 125px;
+            font-weight:normal;
+            transition: 0.3s;
+        }
+
+        #close:hover,
+        #close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #img01{
+            width : 80% ;
+            height: 90% ;
+            /* position: absolute;
+            top : 50%;
+            left : 50%;
+            transform: translate(-50%, -50%); */
+        }
+        #roomText{
+            font-family: Roboto-Black;
+            font-size: 27px;
+            font-weight: bold;
+            position: absolute;
+            top : 16%;
+            left : 28.5%;
+            width: 100%;
+        }
+        #roomNo{
+            margin-left: 50px;
+            padding: 5px;
+            border: 1px solid rgba(0, 0, 0, .5);
+            border-radius: 6px;
+            background-color : transparent;
+            text-decoration-line: none;
+            background :  rgba(0, 56, 101, 0.8);
+            text-align: center;
+            color: #FFFFFF;
+            font-size: 24px;
+            font-weight: normal;
+            width : 220px;
+            margin-right : 230px;
+        }
+        #mapbtn{
+            padding: 10px 14px;
+            border : 1px solid #FFCD00;
+            background-color: #FFCD00;
+            cursor: pointer;
+        }
+        #exampleModal{
+            position: absolute;
+            left : 50%;
+            position: fixed;
+            z-index: 1; 
+            padding-top: 100px; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .keyboard {
+            position: fixed;
+            left: 39%;
+            bottom : 8%;
+            width: 20%;
+            height:540px;
+            padding: 5px 0;
+            background: #004134;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            user-select: none;
+            transition: bottom 0.4s;
+        }
+
+        .keyboard--hidden {
+            bottom : -100%;
+        }
+
+        .keyboard__keys {
+            text-align: center;
+        }
+
+        .keyboard__key {
+            height: 80px;
+            width: 100px;
+            margin: 12px;
+            border-radius: 4px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-size: 2.05rem;
+            outline: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: top;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+        }
+        .keyboard__key:active {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .keyboard__key--wide {
+            width: 20%;
+        }
+
+        .keyboard__key--extra-wide {
+            width: 36%;
+            max-width: 500px;
+        }
+
+        .keyboard__key--activatable::after {
+            content: '';
+            top: 10px;
+            right: 10px;
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+        }
+
+        .keyboard__key--active::after {
+            background: #08ff00;
+        }
+
+        .keyboard__key--dark {
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+    </style>
+
+</head>
+
+<body id="body" style="z-index:1; overflow:hidden;">
+
+    <img id="bkg" src='img/bkg.png' />
+    <img id="weatherBG" src="img/weatherBG.png">
+    <img id="weatherIcon" src="https://cdn.aerisapi.com/wxblox/icons/cloudyn.png">
+    <!-- <img id="weatherIcon" src="http://api.accuweather.com/developers/Media/Default/WeatherIcons/07-s.png"> -->
+    <div id="dayContainer"></div>
+    <div id="dateContainer"></div>
+    <div id="tempContainer">34°</div>
+    <div id="clockDate">
+
+    </div>
+    <div id="clockTime">
+
+    </div>
+    <div id="clockClock">
+
+    </div>
+    <img id="yellowBar" src="img/Group 604.png" />
+    <img id='campusmap_btn' src='img/campusmap_btn.png' />
+    <img id='aab_buttn' src='img/aab_buttn.png' />
+    <img id='eventdirectory_btn' src='img/eventdirectory_btn.png' />
+    <img id='roomdirectory_btn' src='img/roomdirectory_btn.png' />
+    <div id="campusMap">
+        <div class="pageTitleText">
+            CAMPUS MAP
+        </div>
+        <img id='campuslegend' src='img/campuslegend.png' />
+        <img id='legendText' src='img/LEGEND.png' />
+        <img id='youarehere' src='img/You Are Here.png' />
+        <img id='youarehereinlegend' src='img/youarehereinlegend.png' />
+        <img id='parkingicon' src='img/parkingicon.png' />
+        <img id='busstopicon' src='img/busstopicon.png' />
+        <img id='busstop' src='img/Bus Stop.png' />
+        <img id='parking' src='img/Parking.png' />
+        <!-- <img id="aabMap2" src='img/aabMap.png' /> -->
+        <img id="aabMap" src='img/campus mapaab.png' />
+        <!-- <img id="techMap" src='img/techMap.png' /> -->
+    </div>
+    <div id="academicMap" style="display:none">
+        <div id='CommandNotFound'>
+
+
+            <span id='notFoundRoom'>Room not found: </span>
+        </div>
+        <div id="aabTitle">
+            ACADEMIC AND ADMINISTRATION BUILDING(AAB)
+        </div>
+        <img id='academiclegend' src='img/Rectangle 231.png' />
+        <img id='legendText' src='img/LEGEND.png' />
+        <img id='youarehere' src='img/You Are Here.png' />
+        <img id='youarehereinlegend' src='img/youarehereinlegend.png' />
+        <img id='restrooms' src='img/Restrooms.png' />
+        <img id='restroomsicon' src='img/restrooms icon.png' />
+        <img id='stairsicon' src='img/stairs icon.png' />
+        <img id='stairs' src='img/Stairs.png' />
+        <img id='elevators' src='img/Elevators.png' />
+        <img id='elevatoricon' src='img/elevator icon.png' />
+        <img id='entrances-exits' src='img/entrances-exits.png' />
+        <img id='entrances-exitsText' src='img/entranceExitText.png' />
+        <img id='handicapicon' src='img/handicap icon.png' />
+        <img id='handicapaccessible' src='img/Handicap Accessible.png' />
+        <img id='basement' src='img/B.png' />
+        <img id='one' src='img/1.png' />
+        <img id='two' src='img/2.png' />
+        <img id='three' src='img/3.png' />
+        <img id='four' src='img/4.png' />
+
+        <div id='themap'>
+
+        </div>
+    </div>
+    <div id="eventDirectory" style="display: block;">
+        <div class="pageTitleText">
+            EVENT DIRECTORY
+        </div>
+        <div id="eventDirContainer" class="swiper-container-horizontal">
+            <div id="eventDirContainerList" class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+                <ul class="eventDirSlide swiper-slide swiper-slide-active" id="eventSlide1" style="width: 1750px; margin-right: 100px;">
+                    <li class="eventBoxContainer">
+                        <div class="eventBox">
+                            <span class="eventHeaderText">Event:</span>
+                            <span class="eventSubHeaderText">Event - 1</span>
+                            <span class="eventRoomHeaderText">Room:</span>
+                            <span class="eventRoomSubHeaderText">115</span>
+                            <span class="eventRoomHeaderDateLabel">Date:</span>
+                            <span class="eventRoomSubHeaderDate">11/12</span>
+                        </div>
+                        <div class="eventBar">
+                            <span class="eventTimeText">12:00 AM - 11:30 PM</span>
+                        </div>
+                        <!-- <div class="eventMap">
+                            <div class="eventMapText">MAP IT</div>
+                        </div> -->
+                    </li>
+                    <li class="eventBoxContainer">
+                        <div class="eventBox">
+                            <span class="eventHeaderText">Event:</span>
+                            <span class="eventSubHeaderText">Event - 2</span>
+                            <span class="eventRoomHeaderText">Room:</span>
+                            <span class="eventRoomSubHeaderText">114</span>
+                            <span class="eventRoomHeaderDateLabel">Date:</span>
+                            <span class="eventRoomSubHeaderDate">11/12</span>
+                        </div>
+                        <div class="eventBar">
+                            <span class="eventTimeText">10:00 AM - 11:20 AM</span>
+                        </div>
+                        <!-- <div class="eventMap">
+                            <div class="eventMapText">MAP IT</div>
+                        </div> -->
+                    </li>
+                    <li class="eventBoxContainer">
+                        <div class="eventBox">
+                            <span class="eventHeaderText">Event:</span>
+                            <span class="eventSubHeaderText">Event - 3</span>
+                            <span class="eventRoomHeaderText">Room:</span>
+                            <span class="eventRoomSubHeaderText">117</span>
+                            <span class="eventRoomHeaderDateLabel">Date:</span>
+                            <span class="eventRoomSubHeaderDate">11/12</span>
+                        </div>
+                        <div class="eventBar">
+                            <span class="eventTimeText">10:00 AM - 10:40 AM</span>
+                        </div>
+                        <!-- <div class="eventMap">
+                            <div class="eventMapText">MAP IT</div>
+                        </div> -->
+                    </li>
+                    <li class="eventBoxContainer">
+                        <div class="eventBox">
+                            <span class="eventHeaderText">Event:</span>
+                            <span class="eventSubHeaderText">Event - 4</span>
+                            <span class="eventRoomHeaderText">Room:</span>
+                            <span class="eventRoomSubHeaderText">117</span>
+                            <span class="eventRoomHeaderDateLabel">Date:</span>
+                            <span class="eventRoomSubHeaderDate">11/12</span>
+                        </div>
+                        <div class="eventBar">
+                            <span class="eventTimeText">10:00 AM - 10:40 AM</span>
+                        </div>
+                        <!-- <div class="eventMap">
+                            <div class="eventMapText">MAP IT</div>
+                        </div> -->
+                    </li>
+                    <li class="eventBoxContainer">
+                        <div class="eventBox">
+                            <span class="eventHeaderText">Event:</span>
+                            <span class="eventSubHeaderText">Event - 5</span>
+                            <span class="eventRoomHeaderText">Room:</span>
+                            <span class="eventRoomSubHeaderText">117</span>
+                            <span class="eventRoomHeaderDateLabel">Date:</span>
+                            <span class="eventRoomSubHeaderDate">11/12</span>
+                        </div>
+                        <div class="eventBar">
+                            <span class="eventTimeText">10:40 AM - 11:20 AM</span>
+                        </div>
+                        <!-- <div class="eventMap">
+                            <div class="eventMapText">MAP IT</div>
+                        </div> -->
+                    </li>
+                    <li class="eventBoxContainer">
+                        <div class="eventBox">
+                            <span class="eventHeaderText">Event:</span>
+                            <span class="eventSubHeaderText">Event - 6</span>
+                            <span class="eventRoomHeaderText">Room:</span>
+                            <span class="eventRoomSubHeaderText">114</span>
+                            <span class="eventRoomHeaderDateLabel">Date:</span>
+                            <span class="eventRoomSubHeaderDate">11/12</span>
+                        </div>
+                        <div class="eventBar">
+                            <span class="eventTimeText">2:30 PM - 5:20 PM</span>
+                        </div>
+                        <!-- <div class="eventMap">
+                            <div class="eventMapText">MAP IT</div>
+                        </div> -->
+                    </li>
+                    <li class="eventBoxContainer">
+                        <div class="eventBox">
+                            <span class="eventHeaderText">Event:</span>
+                            <span class="eventSubHeaderText">Event - 7</span>
+                            <span class="eventRoomHeaderText">Room:</span>
+                            <span class="eventRoomSubHeaderText">117</span>
+                            <span class="eventRoomHeaderDateLabel">Date:</span>
+                            <span class="eventRoomSubHeaderDate">11/12</span>
+                        </div>
+                        <div class="eventBar">
+                            <span class="eventTimeText">2:30 PM - 3:50 PM</span>
+                        </div>
+                        <!-- <div class="eventMap">
+                            <div class="eventMapText">MAP IT</div>
+                        </div> -->
+                    </li>
+                    <li class="eventBoxContainer">
+                        <div class="eventBox">
+                            <span class="eventHeaderText">Event:</span>
+                            <span class="eventSubHeaderText">Event - 8</span>
+                            <span class="eventRoomHeaderText">Room:</span>
+                            <span class="eventRoomSubHeaderText">114</span>
+                            <span class="eventRoomHeaderDateLabel">Date:</span>
+                            <span class="eventRoomSubHeaderDate">11/12</span>
+                        </div>
+                        <div class="eventBar">
+                            <span class="eventTimeText">7:00 PM - 9:50 PM</span>
+                        </div>
+                        <!-- <div class="eventMap">
+                            <div class="eventMapText">MAP IT</div>
+                        </div> -->
+                    </li>
+                    <li class="eventBoxContainer">
+                        <div class="eventBox">
+                            <span class="eventHeaderText">Event:</span>
+                            <span class="eventSubHeaderText">Event - 9</span>
+                            <span class="eventRoomHeaderText">Room:</span>
+                            <span class="eventRoomSubHeaderText">114</span>
+                            <span class="eventRoomHeaderDateLabel">Date:</span>
+                            <span class="eventRoomSubHeaderDate">11/12</span>
+                        </div>
+                        <div class="eventBar">
+                            <span class="eventTimeText">7:00 PM - 9:50 PM</span>
+                        </div>
+                        <!-- <div class="eventMap">
+                            <div class="eventMapText">MAP IT</div>
+                        </div> -->
+                    </li>
+                </ul>
+            </div>
+        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+    </div>
+    <div id="roomDirectory" style="display:none;">       
+        <div id="roomTitleText">
+            ROOM DIRECTORY
+        </div>
+        <div id="roomText">
+            ENTER THE ROOM NUMBER   :<input type="text" class="use-keyboard-input" id="roomNo" required>
+            <img class="mapItBtn" id="mapbtn" src="mapItBtn.png" alt="Map it button" onclick="textFun()">
+        </div>
+        <div style="display: none;" id="exampleModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">COLLEGE CAMPUS NAV DISPLAY SYSTEM</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" onclick="document.getElementById('exampleModal').style.display='none'">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ENTER A VALID ROOM NUMBER
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal" onclick="document.getElementById('exampleModal').style.display='none'">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="fixTableHead" >
+            <div class="Container">
+            <div class="Content">
+            <table>   
+                    <thead>
+                        <tr>
+                        <th style="text-align:center" width="140px">ROOM NUMBER</th>
+                        <th style="text-align:center" width="350px" >ROOM NAME</th>
+                        <th style="text-align:center" width="160px">FLOOR NUMBER</th>
+                        <th style="text-align:center" width="100px">MAP IT</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    <tr>
+                        <td>101</td>
+                        <td>COMPUTER LAB 1</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('101')"></td>
+                    </tr>
+                    <tr>
+                        <td>102</td>
+                        <td>COMPUTER LAB 2</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('102')"></td>
+                    </tr>
+                    <tr>
+                        <td>103</td>
+                        <td>COMPUTER LAB 3</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('103')"></td>
+                    </tr>
+                    <tr>
+                        <td>104</td>
+                        <td>PLACEMENT ROOM</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('104')"></td>
+                    </tr>
+                    <tr>
+                        <td>105</td>
+                        <td>COMPUTER LAB 4</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('105')"></td>
+                    </tr>
+                    <tr>
+                        <td>106</td>
+                        <td>MAINTENANCE LAB</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('106')"></td>
+                    </tr>
+                    <tr>
+                        <td>107</td>
+                        <td>COMPUTER LAB 5</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('107')"></td>
+                    </tr>
+                    <tr>
+                        <td>108</td>
+                        <td>E-CLASS ROOM</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('108')"></td>
+                    </tr>
+                    <tr>
+                        <td>109</td>
+                        <td>DEPARTMENT OF PHYSICAL EDUCATION<br>MULTI GYM</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('109')"></td>
+                    </tr>
+                    <tr>
+                        <td>110</td>
+                        <td>STAFF AND PHYSICALLY HANDICAPPED TOILETS</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('110')"></td>
+                    </tr>
+                    <tr>
+                        <td>111</td>
+                        <td>SECRETARY AND CORRESPONDENT</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('111')"></td>
+                    </tr>
+                    <tr>
+                        <td>112</td>
+                        <td>CHAIRMAN</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('112')"></td>
+                    </tr>
+                    <tr>
+                        <td>113</td>
+                        <td>ADMINISTRATIVE OFFICER</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('113')"></td>
+                    </tr>
+                    <tr>
+                        <td>114</td>
+                        <td>EXAMINATION CELL</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('114')"></td>
+                    </tr>
+                    <tr>
+                        <td>115</td>
+                        <td>PRINCIPAL</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('115')"></td>
+                    </tr>
+                    <tr>
+                        <td>116</td>
+                        <td>RECEPTION</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('116')"></td>
+                    </tr>
+                    <tr>
+                        <td>117</td>
+                        <td>BOOK CENTER</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('117')"></td>
+                    </tr>
+                    <tr>
+                        <td>118</td>
+                        <td>STAFF TOILETS</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('118')"></td>
+                    </tr>
+                    <tr>
+                        <td>119</td>
+                        <td>FLUID MECHANICS AND HYDRAULIC MACHINES LAB</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('119')"></td>
+                    </tr>
+                    <tr>
+                        <td>120</td>
+                        <td>STRENGTH AND MATERIALS LAB</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('120')"></td>
+                    </tr>
+                    <tr>
+                        <td>121</td>
+                        <td>ELECTRICAL MACHINES LAB I & II<br>POWER SYSTEMS LAB</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('121')"></td>
+                    </tr>
+                    <tr>
+                        <td>122</td>
+                        <td>MACHINE TOOLS LAB</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('122')"></td>
+                    </tr>
+                    <tr>
+                        <td>123</td>
+                        <td>ENGINEERING WORKSHOP</td>
+                        <td>1</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('123')"></td>
+                    </tr>
+                    <tr>
+                        <td>201</td>
+                        <td>STORE ROOM</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('201')"></td>
+                    </tr>
+                    <tr>
+                        <td>202</td>
+                        <td>IV CSE LECTURE HALL</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('202')"></td>
+                    </tr>
+                    <tr>
+                        <td>203</td>
+                        <td>SEMINAR HALL</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('203')"></td>
+                    </tr>
+                    <tr>
+                        <td>204</td>
+                        <td>III CSE LECTURE HALL</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('204')"></td>
+                    </tr>
+                    <tr>
+                        <td>205</td>
+                        <td>LADIES TOILET</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('205')"></td>
+                    </tr>
+                    <tr>
+                        <td>206</td>
+                        <td>PHYSICS LAB</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('206')"></td>
+                    </tr>
+                    <tr>
+                        <td>207</td>
+                        <td>CHEMISTRY LAB</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('207')"></td>
+                    </tr>
+                    <tr>
+                        <td>208</td>
+                        <td>GENTS TOILET</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('208')"></td>
+                    </tr>
+                    <tr>
+                        <td>209</td>
+                        <td>COMMUNICATION/DIGITAL DESIGN LAB</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('209')"></td>
+                    </tr>
+                    <tr>
+                        <td>209A</td>
+                        <td>PROJECT ROOM/DEPT. LIBRARY</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('209A')"></td>
+                    </tr>
+                    <tr>
+                        <td>210</td>
+                        <td>ECA/LICA LAB</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('210')"></td>
+                    </tr>
+                    <tr>
+                        <td>211</td>
+                        <td>MICROWAVE AND OPTICAL COMM. LAB</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('211')"></td>
+                    </tr>
+                    <tr>
+                        <td>211A</td>
+                        <td>HOD CABIN(ECE)</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('211A')"></td>
+                    </tr>
+                    <tr>
+                        <td>212</td>
+                        <td>ELECTRONIC DEVICES AND CIRCUITS LAB</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('212')"></td>
+                    </tr>
+                    <tr>
+                        <td>213</td>
+                        <td>ECE STAFF ROOM</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('213')"></td>
+                    </tr>
+                    <tr>
+                        <td>214</td>
+                        <td>II ECE LECTURE HALL</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('214')"></td>
+                    </tr>
+                    <tr>
+                        <td>215</td>
+                        <td>COMPUTER AIDED DESIGN LAB</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('215')"></td>
+                    </tr>
+                    <tr>
+                        <td>216</td>
+                        <td>III ECE LECTURE HALL</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('216')"></td>
+                    </tr>
+                    <tr>
+                        <td>217</td>
+                        <td>CSE STAFF ROOM</td>
+                        <td>2</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('217')"></td>
+                    </tr>
+                    <tr>
+                        <td>301</td>
+                        <td>LADIES WAITING HALL</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('301')"></td>
+                    </tr>
+                    <tr>
+                        <td>302</td>
+                        <td>II CSE A LECTURE HALL</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('302')"></td>
+                    </tr>
+                    <tr>
+                        <td>303</td>
+                        <td>II CSE B LECTURE HALL</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('303')"></td>
+                    </tr>
+                    <tr>
+                        <td>304</td>
+                        <td>LIBRARY</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('304')"></td>
+                    </tr>
+                    <tr>
+                        <td>305</td>
+                        <td>II CSM LECTURE HALL</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('305')"></td>
+                    </tr>
+                    <tr>
+                        <td>306</td>
+                        <td>GENTS TOILET</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('306')"></td>
+                    </tr>
+                    <tr>
+                        <td>307</td>
+                        <td>METALLURGY LAB</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('307')"></td>
+                    </tr>
+                    <tr>
+                        <td>308</td>
+                        <td>NSS ROOM</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('308')"></td>
+                    </tr>
+                    <tr>
+                        <td>309</td>
+                        <td>SEMINAR HALL</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('309')"></td>
+                    </tr>
+                    <tr>
+                        <td>310</td>
+                        <td>LADIES TOILET</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('310')"></td>
+                    </tr>
+                    <tr>
+                        <td>311</td>
+                        <td>DRAWING HALL - 1</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('311')"></td>
+                    </tr>
+                    <tr>
+                        <td>312</td>
+                        <td>DRAWING HALL - 2</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('312')"></td>
+                    </tr>
+                    <tr>
+                        <td>313</td>
+                        <td>III MECH LECTURE HALL</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('313')"></td>
+                    </tr>
+                    <tr>
+                        <td>314</td>
+                        <td>IV MECH LECTURE HALL</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('314')"></td>
+                    </tr>
+                    <tr>
+                        <td>315</td>
+                        <td>IV ECE LECTURE HALL</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('315')"></td>
+                    </tr>
+                    <tr>
+                        <td>316</td>
+                        <td>MECHANICAL STAFF ROOM</td>
+                        <td>3</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('316')"></td>
+                    </tr>
+                    <tr>
+                        <td>401</td>
+                        <td>H&BS STAFF ROOM</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('401')"></td>
+                    </tr>
+                    <tr>
+                        <td>402</td>
+                        <td>METROLOGY LAB<br>INSTRUMENTATION LAB</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('402')"></td>
+                    </tr>
+                    <tr>
+                        <td>403</td>
+                        <td>LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('403')"></td>
+                    </tr>
+                    <tr>
+                        <td>404</td>
+                        <td>I ECE & I MECH LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('404')"></td>
+                    </tr>
+                    <tr>
+                        <td>405</td>
+                        <td>I CSE A LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('405')"></td>
+                    </tr>
+                    <tr>
+                        <td>406</td>
+                        <td>LADIES WAITING HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('406')"></td>
+                    </tr>
+                    <tr>
+                        <td>407</td>
+                        <td>I CSM LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('407')"></td>
+                    </tr>
+                    <tr>
+                        <td>408</td>
+                        <td>I CSE B LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('408')"></td>
+                    </tr>
+                    <tr>
+                        <td>409</td>
+                        <td>LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('409')"></td>
+                    </tr>
+                    <tr>
+                        <td>410</td>
+                        <td>GENTS TOILET</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('410')"></td>
+                    </tr>
+                    <tr>
+                        <td>411</td>
+                        <td>LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('411')"></td>
+                    </tr>
+                    <tr>
+                        <td>412</td>
+                        <td>II MECH LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('412')"></td>
+                    </tr>
+                    <tr>
+                        <td>413</td>
+                        <td>SEMINAR HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('413')"></td>
+                    </tr>
+                    <tr>
+                        <td>414</td>
+                        <td>LADIES TOILET</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('414')"></td>
+                    </tr>
+                    <tr>
+                        <td>415</td>
+                        <td>EC LAB/EM LAB</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('415')"></td>
+                    </tr>
+                    <tr>
+                        <td>416</td>
+                        <td>CS LAB/PE LAB</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('416')"></td>
+                    </tr>
+                    <tr>
+                        <td>417</td>
+                        <td>HOD CABIN(EEE)</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('417')"></td>
+                    </tr>
+                    <tr>
+                        <td>418</td>
+                        <td>III EEE LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('418')"></td>
+                    </tr>
+                    <tr>
+                        <td>419</td>
+                        <td>IV EEE LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('419')"></td>
+                    </tr>
+                    <tr>
+                        <td>420</td>
+                        <td>LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('420')"></td>
+                    </tr>
+                    <tr>
+                        <td>421</td>
+                        <td>III CIVIL LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('421')"></td>
+                    </tr>
+                    <tr>
+                        <td>422</td>
+                        <td>IV CIVIL LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('422')"></td>
+                    </tr>
+                    <tr>
+                        <td>423</td>
+                        <td>LECTURE HALL</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('423')"></td>
+                    </tr>
+                    <tr>
+                        <td>424</td>
+                        <td>CIVIL STAFF ROOM</td>
+                        <td>4</td>
+                        <td><img class="mapItBtn" id="btn" src="mapItBtn.png" alt="Map it button" onclick="myfun('424')"></td>
+                    </tr>
+                </tr>
+                </tbody>
+            </table>
+            
+            <div id="myModal" class="modal">
+                <span id ="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                <img class="modal-content1" id="img01">
+            </div>
+        </div>
+        
+
+        <!-- <div id='filterText'>
+            Filter
+        </div>
+        <div id="allFilter" class="filterBtn activeFilterBtn">
+            <div class="filterBtnText">
+                ALL
+            </div>
+        </div>
+        <div id="classroomFilter" class="filterBtn">
+            <div class="filterBtnText">
+                CLASSROOM
+            </div>
+        </div>
+        <div id="commonFilter" class="filterBtn">
+            <div class="filterBtnText">
+                COMMON
+            </div>
+        </div>
+        <div id="conferenceFilter" class="filterBtn">
+            <div class="filterBtnText">
+                CONFERENCE
+            </div>
+        </div>
+        <div id="officeFilter" class="filterBtn">
+            <div class="filterBtnText">
+                OFFICE
+            </div>
+        </div>
+        <div id="studyFilter" class="filterBtn">
+            <div class="filterBtnText">
+                STUDY
+            </div>
+        </div>
+        <div id="roomSelectRowText">SELECT ROW</div>
+        <img id="roomRowDownBtn" src="img/rowDownBtn.png">
+        <img id="roomRowUpBtn" src="img/rowUpBtn.png">
+        <img id="roomMapItBtn" src="img/mapItBtn.png"> -->
+        <!-- <div class="voiceEnabled">
+            <img src='img/voiceEnabled.png' />
+        </div> -->
+    </div>
+</body>
+<script>
+
+    var dirList = {};
+    var nameList = {};
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    // var currentBuilding = urlParams.get('building'); //for Hidden link only
+    var currentBuilding = "AAB";
+    var ScreenState = "Campus"
+    if (currentBuilding != "TB" && currentBuilding != "AAB" && currentBuilding != "AAB2") {
+        currentBuilding = "AAB"
+    }
+    var currentPlayer = "HiddenLink";
+
+
+    //TB button is slightly off, so this fixes the position
+    if (currentBuilding == "TB") {
+        document.getElementById("aab_buttn").style.left = "292px";
+    }
+
+    var transitionSpeed = parseInt(urlParams.get('speed'))
+
+    if (transitionSpeed > 0) {
+        transitionSpeed = transitionSpeed * 1000
+    } else {
+        transitionSpeed = 5000
+    }
+</script>
+<!-- <script src="js/jquery-3.5.1.min.js"></script> -->
+<script src="js/jquery-1.12.4.min.js"></script>
+<!-- <script src="js/jquery.visible.js"></script> -->
+<script src="js/jquery.csv.min.js"></script>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/leaflet.js"></script>
+<script src="js/leaflet-ant-path.js"></script>
+<script src="js/maploading.js"></script>
+<script src="js/mapping.js"></script>
+<script src="js/Util.js"></script>
+<script src="js/roomPathsAAB.js"></script>
+<script src="js/roomPathsAAB2.js"></script>
+<script src="js/roomPathsTB.js"></script>
+
+<script src="js/roomDir.js"></script>
+
+<script src="js/Timeout.js"></script>
+<script src="vui/audioDetect.js"></script>
+<script src="vui/capture.js"></script>
+<script src="vui/navigation.js"></script>
+<script src="vui/pipeline.js"></script>
+<script src="js/clock.js"></script>
+<script src="js/sms.js"></script>
+
+
+
+<script>
+    //SLCC/index.html?building=AAB
+    //SLCC/index.html?building=TB
+
+    function moveComponentsForBuilding() {
+        if (currentBuilding == "AAB") {
+            $("#path3639").css('left', '1064px')
+            $("#selecttochangefloor").css('left', '1037px')
+            $("#path3640").css('left', '1035px')
+            $("#basement").hide()
+            $("#techMap").hide()
+            $("#aabMap").show()
+        } 
+        // else if (currentBuilding == "AAB2") {
+        //     $("#path3639").css('left', '1064px')
+        //     $("#selecttochangefloor").css('left', '1037px')
+        //     $("#path3640").css('left', '1035px')
+        //     $("#basement").hide()
+        //     $("#techMap").hide()
+        //     $("#aabMap").hide()
+        // } 
+        else {
+            $("#path3639").css('left', '984.47px')
+            $("#selecttochangefloor").css('left', '957.47px')
+            $("#path3640").css('left', '955.34px')
+
+            $("#one").css('left', '1238px')
+            $("#two").css('left', '1326px')
+            $("#three").css('left', '1415px')
+            $("#four").css('left', '1504px')
+            $("#basement").show()
+            $("#techMap").show()
+            $("#aabMap").hide()
+            $("#aabTitle").html("TECHNOLOGY BUILDING")
+            $("#aabTitle").css('top', '175px')
+        }
+    }
+    moveComponentsForBuilding()
+
+    $("#campusLocations").children().click(function() {
+        if ($(this).attr('id') == "Technology Building" && currentBuilding == "TB") {
+            $("#aab_buttn").trigger('click')
+            return
+        }
+        if ($(this).attr('id') == "Academic and Administration Building" && (currentBuilding == "AAB" || currentBuilding == "AAB2")) {
+            $("#aab_buttn").trigger('click')
+            return
+        }
+
+        console.log($(this).attr('id'))
+        lastRoute = $(this).attr('id')
+        $("#SMSbtn2").show();
+    })
+    $("#campusmap_btn").click(function() {
+        displayScreen("campus")
+    })
+    $("#aab_buttn").click(function() {
+        displayScreen("academic")
+    })
+    $("#eventdirectory_btn").click(function() {
+        displayScreen("event");
+        eventsSwiper.slideTo(0);
+    })
+    $("#roomdirectory_btn").click(function() {
+        displayScreen("room");
+        $("#allFilter").click();
+    })
+    // $("#basement").click(function() {
+    //     currentLevel = 0
+    //     changeLeafletMap()
+    //     setActiveFloorButton()
+    // })
+    $("#one").click(function() {
+        currentLevel = 1
+        changeLeafletMap()
+        setActiveFloorButton()
+    })
+    $("#two").click(function() {
+        currentLevel = 2
+        changeLeafletMap()
+        setActiveFloorButton()
+    })
+    $("#three").click(function() {
+        currentLevel = 3
+        changeLeafletMap()
+        setActiveFloorButton()
+    })
+    $("#four").click(function() {
+        currentLevel = 4
+        changeLeafletMap()
+        setActiveFloorButton()
+    })
+    // $("#help").click(function() {
+    //     console.log('help clicked')
+    //     $("#helpOverlay").show();
+    // })
+    // $("#helpOverlay").click(function() {
+    //     $("#helpOverlay").hide();
+    // })
+
+    // var phoneString = ""
+    // $("#p1").click(function() {
+    //     addToPhoneString("1")
+    // })
+    // $("#p2").click(function() {
+    //     addToPhoneString("2")
+    // })
+    // $("#p3").click(function() {
+    //     addToPhoneString("3")
+    // })
+    // $("#p4").click(function() {
+    //     addToPhoneString("4")
+    // })
+    // $("#p5").click(function() {
+    //     addToPhoneString("5")
+    // })
+    // $("#p6").click(function() {
+    //     addToPhoneString("6")
+    // })
+    // $("#p7").click(function() {
+    //     addToPhoneString("7")
+    // })
+    // $("#p8").click(function() {
+    //     addToPhoneString("8")
+    // })
+    // $("#p9").click(function() {
+    //     addToPhoneString("9")
+    // })
+    // $("#p0").click(function() {
+    //     addToPhoneString("0")
+    // })
+    // $("#pBack").click(function() {
+    //     addToPhoneString("b")
+    // })
+    // $("#pClose").click(function() {
+    //     phoneString = ""
+    //     lastText = ""
+    //     updatePhoneDisplay()
+    //     $("#phone").hide()
+    // })
+
+    // $("#SMSbtn").click(function() {
+    //     $("#phone").show();
+    // })
+    // $("#SMSbtn2").click(function() {
+    //     $("#phone").show();
+    // })
+    // var directionsList = ""
+    // $("#pSend").click(function() {
+        //lastRoute holds the last room. Need to grab the directions when available
+        //directionsList = lastRoute
+
+    //     directionsList = "Directions to " + lastRoute + " " + turnByTurn[lastRoute];
+
+    //     smsText(phoneString, directionsList)
+    //     $("#phone").hide();
+    //     $('#pText').text("");
+    // })
+    // var turnByTurn = {}
+    // $(document).ready(function() {
+    //     dataSource = currentBuilding.toUpperCase();
+    //     if (currentBuilding == "AAB" || currentBuilding == "TB" || currentBuilding == "AAB2") {
+    //         $.ajax({
+    //             type: "GET",
+    //             url: "frontend/php/getData.php?dbtable=tbt" + dataSource.toLowerCase(),
+    //             // url: "http://www.visixcreative.com/test/SLCC/frontend/php/getData.php?dbtable=tbt" + currentBuilding.toLowerCase(),
+        //         dataType: "json",
+        //         success: function(data) {
+        //             data.forEach(e => {
+        //                 turnByTurn[e.field1] = e.field2;
+        //             })
+        //         }
+        //     });
+        // }
+        // if (currentBuilding == "AAB") {
+        //     $.ajax({
+        //         type: "GET",
+        //         url: "data/tbtAAB.csv",
+        //         dataType: "text",
+        //         success: function(data) {
+        //             var input = $.csv.toArrays(data);
+        //             turnByTurn = input
+        //         }
+        //     });
+        // } else {
+        //     $.ajax({
+        //         type: "GET",
+        //         url: "data/tbtTB.csv",
+        //         dataType: "text",
+        //         success: function(data) {
+        //             var input = $.csv.toArrays(data);
+        //             turnByTurn = input
+        //         }
+        //     });
+        // }
+    // });
+
+    // function addToPhoneString(digit) {
+    //     if (digit != "b" && phoneString.length > 9) {
+    //         return false
+    //     }
+    //     if (digit != "b") {
+    //         phoneString += digit
+    //     } else if (phoneString.length > 0) {
+    //         phoneString = phoneString.substr(0, phoneString.length - 1)
+    //     }
+    //     console.log(phoneString)
+    //     updatePhoneDisplay()
+    // }
+
+    // function updatePhoneDisplay() {
+    //     if (phoneString.length < 4) {
+    //         $("#pText").text(phoneString.replace(/(\d{3})(\d{0,3})(\d{0,4})/, "$1"))
+    //     } else if (phoneString.length < 7) {
+    //         $("#pText").text(phoneString.replace(/(\d{3})(\d{0,3})(\d{0,4})/, "$1-$2"))
+    //     } else {
+    //         $("#pText").text(phoneString.replace(/(\d{3})(\d{3})(\d{0,4})/, "$1-$2-$3"))
+    //     }
+
+    // }
+    // $(".filterBtn").click(function() {
+    //     $(".filterBtn").removeClass("activeFilterBtn");
+    //     $(this).addClass("activeFilterBtn");
+    //     switch (this.id) {
+    //         case "allFilter":
+    //             comboFilterList([
+    //                 [""], 1, true
+    //             ], $("#roomDirContainer"));
+    //             break;
+    //         case "classroomFilter":
+    //             comboFilterList([
+    //                 ["Classroom"], 1, true
+    //             ], $("#roomDirContainer"));
+    //             break;
+    //         case "commonFilter":
+    //             comboFilterList([
+    //                 ["Common"], 1, true
+    //             ], $("#roomDirContainer"));
+    //             break;
+    //         case "conferenceFilter":
+    //             comboFilterList([
+    //                 ["Conference"], 1, true
+    //             ], $("#roomDirContainer"));
+    //             break;
+    //         case "officeFilter":
+    //             comboFilterList([
+    //                 ["Office"], 1, true
+    //             ], $("#roomDirContainer"));
+    //             break;
+    //         case "studyFilter":
+    //             comboFilterList([
+    //                 ["Study"], 1, true
+    //             ], $("#roomDirContainer"));
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // });
+
+
+    $("#roomMapItBtn").click(function() {
+        $("#roomDirContainer .rowA .mapItBtn").click();
+    });
+
+    function setActiveFloorButton() {
+        $("#basement").attr('src', 'img/B.png')
+        $("#one").attr('src', 'img/1.png')
+        $("#two").attr('src', 'img/2.png')
+        $("#three").attr('src', 'img/3.png')
+        $("#four").attr('src', 'img/4.png')
+        switch (currentLevel) {
+            case 0:
+                $("#basement").attr('src', 'img/BOn.png')
+                break;
+            case 1:
+                $("#one").attr('src', 'img/1On.png')
+                break;
+            case 2:
+                $("#two").attr('src', 'img/2On.png')
+                break;
+            case 3:
+                $("#three").attr('src', 'img/3On.png')
+                break;
+            case 4:
+                $("#four").attr('src', 'img/4On.png')
+                break;
+        }
+    }
+
+    function displayScreen(screen) {
+        $("#CommandNotFound").hide();
+        $("#helpClose").trigger('click')
+        $("#SMSbtn2").hide();
+        $("#SMSbtn").hide();
+        $("#phone").hide();
+        $("#academicMap").hide();
+        $("#campusMap").hide();
+        $("#eventDirectory").hide();
+        $("#roomDirectory").hide();
+        $("#campusmap_btn").attr('src', 'img/campusmap_btn.png')
+        if (currentBuilding == "AAB") {
+            $("#aab_buttn").attr('src', 'img/aab_buttn.png')
+        } else if (currentBuilding == "AAB2") {
+            $("#aab_buttn").attr('src', 'img/aab_buttn.png')
+        } else {
+            $("#aab_buttn").attr('src', 'img/tech_buttn.png')
+        }
+        $("#eventdirectory_btn").attr('src', 'img/eventdirectory_btn.png')
+        $("#roomdirectory_btn").attr('src', 'img/roomdirectory_btn.png')
+        switch (screen) {
+            case "campus":
+                ScreenState = "Campus"
+                $("#campusmap_btn").attr('src', 'img/campusmap_btnOn.png')
+                $("#campusMap").show();
+                break;
+            case "academic":
+                ScreenState = "Floor"
+                if (currentBuilding == "AAB" || currentBuilding == "AAB2") {
+                    $("#aab_buttn").attr('src', 'img/aab_buttnOn.png')
+                } else {
+                    $("#aab_buttn").attr('src', 'img/tech_buttnOn.png')
+                }
+                $("#one").trigger('click');
+                $("#academicMap").show();
+                map.invalidateSize();
+                break;
+            case "event":
+                ScreenState = "Event"
+                $("#eventdirectory_btn").attr('src', 'img/eventdirectory_btnOn.png')
+                $("#eventDirectory").show();
+                break;
+            case "room":
+                ScreenState = "Room"
+                $("#roomdirectory_btn").attr('src', 'img/roomdirectory_btnOn.png')
+                $("#roomDirectory").show();
+                break;
+        }
+    }
+
+
+    var currentLevel = 1
+
+    function changeLeafletMap() {
+        $("#phone").hide()
+            // Remove old map layer and add new one
+        map.removeLayer(newmap);
+        map.eachLayer(function(layer) {
+            map.removeLayer(layer);
+        });
+        //$("#cLegend").hide()
+        // $("#mapNorthArrow").removeClass();
+        if (currentBuilding == "AAB") {
+            w = 1300
+            h = 600
+            $("#themap").css('top', '200px')
+            $("#themap").css('left', '400px')
+            switch (currentLevel) {
+                case 1:
+                    //$("#gLegend").hide()
+                    //$("#cLegend").show()
+                    // $("#mapNorthArrow").addClass("northDownOne")
+                    w = 1300
+                    h = 600
+                    $("#themap").css('top', '100px')
+                    $("#themap").css('left', '400px')
+                    if (currentBuilding == "AAB") {
+                        url = "./img/FIRST FLOOR.png"
+                    } 
+                    // else {
+                    //     url = "./img/FIRST FLOOR 22.png"
+                    // }
+
+                    break;
+                case 2:
+                    // $("#mapNorthArrow").addClass("northDownOne")
+                    w = 1300
+                    h = 600
+                    $("#themap").css('top', '100px')
+                    $("#themap").css('left', '400px')
+                    $("#gLegend").hide()
+                    $("#cLegend").show()
+                    url = "./img/SECOND FLOOR.png"
+                    break;
+                case 3:
+                    // $("#mapNorthArrow").addClass("northDownOne")
+                    w = 1300
+                    h = 600
+                    $("#themap").css('top', '100px')
+                    $("#themap").css('left', '400px')
+                    $("#gLegend").hide()
+                    $("#cLegend").show()
+                    url = "./img/THIRD FLOOR.png"
+                    break;
+                case 4:
+                    // $("#mapNorthArrow").addClass("northDownTwo")
+                    w = 1300
+                    h = 600
+                    $("#themap").css('top', '100px')
+                    $("#themap").css('left', '400px')
+                    $("#gLegend").hide()
+                    $("#cLegend").show()
+                    url = "./img/FOURTH FLOOR.png"
+                    break;
+            }
+        } else 
+        {
+            w = 1300
+            h = 600
+            $("#themap").css('top', '100px')
+            $("#themap").css('left', '400px')
+            switch (currentLevel) {
+                case 1:
+                    w = 1300
+                    h = 600
+                    $("#themap").css('top', '100px')
+                    $("#themap").css('left', '400px')
+                    $("#gLegend").hide()
+                    url = "./img/TB/FLOOR 1.png"
+                    break;
+                case 2:
+                    w = 1300
+                    h = 600
+                    $("#themap").css('top', '100px')
+                    $("#themap").css('left', '400px')
+                    $("#gLegend").show()
+                    url = "./img/TB/FLOOR 2.png"
+                    break;
+                case 3:
+                    w = 1300
+                    h = 600
+                    $("#themap").css('top', '100px')
+                    $("#themap").css('left', '400px')
+                    $("#gLegend").show()
+                    url = "./img/TB/FLOOR 3.png"
+                    break;
+                case 4:
+                    w = 1300
+                    h = 600
+                    $("#themap").css('top', '100px')
+                    $("#themap").css('left', '400px')
+                    $("#gLegend").show()
+                    url = "./img/TB/FLOOR 4.png"
+                    break;
+                case 0:
+                    w = 1300
+                    h = 600
+                    $("#themap").css('top', '48.2px')
+                    $("#themap").css('left', '465.28px')
+                    $("#gLegend").show()
+                    url = "./img/TB/FLOOR B.png"
+                    break;
+            }
+            setActiveFloorButton()
+        }
+        // calculate the edges of the image, in coordinate space
+        var southWest = map.unproject([0, h], map.getMaxZoom() - 1);
+        var northEast = map.unproject([w, 0], map.getMaxZoom() - 1);
+        var bounds = new L.LatLngBounds(southWest, northEast);
+
+        newmap = new L.imageOverlay(url, bounds);
+        map.addLayer(newmap);
+
+        // if (currentBuilding == "AAB") {
+        //     curPathList = roomPathsAAB
+        // } else {
+        //     curPathList = roomPathsTB
+        // }
+
+        // curPathList.forEach(e => {
+        //     if (e[1].indexOf(currentLevel) == 0) {
+        //         antPolyline = new L.Polyline.AntPath(e[0], polylineOptions);
+        //         map.addLayer(antPolyline);
+        //     }
+        // })
+
+
+        // options = {color: 'red', weight: 5}
+        // if(currentBuilding == "AAB"){
+        //     curPathList = roomPathsAAB
+        // } else {
+        //     curPathList = roomPathsTB
+        // }
+
+        // curPathList.forEach(function(item){
+        //     //Basement floor height doesn't match XD. Had to resize map after routing. This is to fix the linepaths for that floor.
+        //     if(item[1][0] == currentLevel){
+        //         latlngs = item[0]
+        //         if(currentLevel == 0){
+        //             console.log(latlngs)
+        //             latlngs.forEach(function(latlng){
+        //                 if(item[2] == "R"){
+        //                     latlng[0] += 8
+        //                 } else {
+        //                     latlng[0] += 3
+        //                 }
+        //             })
+        //         }
+        //         antPolyline = new L.Polyline.AntPath(latlngs, polylineOptions);
+        //         map.addLayer(antPolyline)
+        //     }
+        // })
+        map.invalidateSize();
+        //var myIcon = L.icon({ iconUrl: 'img/0/YouAreHere.png', iconSize: [60, 60], iconAnchor: [30, 30] });
+
+    }
+    var lastRoute = ""
+    var firstLoop = true
+
+    function getRoute(room) {
+        $("#helpClose").trigger('click')
+        lastTranscriptRoute = "brutus map to " + room
+        console.log(lastTranscript)
+        $("#phone").hide()
+        console.log("get route for ", room)
+        room = room.toUpperCase()
+        room = room.replace("-", "")
+        lastRoute = room
+        changeLeafletMap()
+        options = {
+            color: 'red',
+            weight: 5
+        }
+        if (currentBuilding == "AAB") {
+            curPathList = roomPathsAAB
+        } else if (currentBuilding == "AAB2") {
+            curPathList = roomPathsAAB2
+        } else {
+            curPathList = roomPathsTB
+        }
+
+        var roomFound = false;
+        // currentLevel = 3
+        //             changeLeafletMap()
+        // curPathList.forEach(function(item){
+        //     if(item[1][0] == "3"){
+        //         antPolyline = new L.Polyline.AntPath(item[0], polylineOptions);
+        //         map.addLayer(antPolyline)
+        //     }
+        // })
+        // map.invalidateSize();
+        // return
+        curPathList.forEach(function(item) {
+            //Basement floor height doesn't match XD. Had to resize map after routing. This is to fix the linepaths for that floor.
+            let latlngs = item[0];
+            if (room == item[1] && currentBuilding == "TB" && item[1][0] == "0" && firstLoop == true) {
+                latlngs.forEach(function(latlng) {
+                    if (item[2] == "R") {
+                        latlng[0] += 8
+                    } else {
+                        latlng[0] += 3
+                    }
+                })
+                firstLoop = false
+            }
+            if (room == item[1].replace("-", "")) {
+                roomFound = true;
+                if (item[1][0] != 1 && currentBuilding == "TB") {
+                    currentLevel = 1
+                    changeLeafletMap()
+                    console.log("item ", item[1][0])
+                    if (item[2] == "R") {
+                        antPolyline = new L.Polyline.AntPath(roomPathsTB[1][0], polylineOptions);
+                        map.addLayer(antPolyline)
+                        setTimeout(function() {
+                            currentLevel = parseInt(item[1][0])
+                            changeLeafletMap()
+                            console.log(latlngs)
+                            antPolyline = new L.Polyline.AntPath(latlngs, polylineOptions);
+                            map.addLayer(antPolyline);
+                            setActiveFloorButton();
+                            //$("#phone").show();
+                            $("#SMSbtn").show();
+
+                        }, transitionSpeed)
+                    } else {
+                        antPolyline = new L.Polyline.AntPath(roomPathsTB[0][0], polylineOptions);
+                        map.addLayer(antPolyline)
+                        setTimeout(function() {
+                            currentLevel = parseInt(item[1][0])
+                            changeLeafletMap()
+                            console.log(latlngs)
+                            antPolyline = new L.Polyline.AntPath(latlngs, polylineOptions);
+                            map.addLayer(antPolyline)
+                            setActiveFloorButton();
+                            //$("#phone").show();
+                            $("#SMSbtn").show();
+                        }, transitionSpeed)
+                    }
+                } else if (currentBuilding == "TB") {
+                    antPolyline = new L.Polyline.AntPath(latlngs, polylineOptions);
+                    map.addLayer(antPolyline);
+                    //$("#phone").show();
+                } else if (item[1][0] != 1) {
+                    if (currentBuilding == "AAB") {
+                        if (item[1][0] == 4) {
+                            antPolyline = new L.Polyline.AntPath(roomPathsAAB[1][0], polylineOptions);
+                        } else {
+                            antPolyline = new L.Polyline.AntPath(roomPathsAAB[0][0], polylineOptions);
+                        }
+                    } else if (currentBuilding == "AAB2") {
+                        if (item[1][0] == 4) {
+                            antPolyline = new L.Polyline.AntPath(roomPathsAAB2[1][0], polylineOptions);
+                        } else {
+                            antPolyline = new L.Polyline.AntPath(roomPathsAAB2[0][0], polylineOptions);
+                        }
+                    }
+
+                    map.addLayer(antPolyline)
+                    setTimeout(function() {
+                        currentLevel = parseInt(item[1][0])
+                        changeLeafletMap()
+                        console.log(latlngs)
+                        antPolyline = new L.Polyline.AntPath(latlngs, polylineOptions);
+                        map.addLayer(antPolyline);
+                        setActiveFloorButton();
+                        //$("#phone").show();
+                        $("#SMSbtn").show();
+                    }, transitionSpeed)
+                } else {
+                    antPolyline = new L.Polyline.AntPath(latlngs, polylineOptions);
+                    map.addLayer(antPolyline);
+                    //$("#phone").show();
+                    $("#SMSbtn").show();
+                }
+            }
+
+        });
+        if (roomFound === false)
+            $("#SMSbtn").show();
+        map.invalidateSize();
+        return roomFound
+    }
+
+    var eventsSwiper;
+
+    function createEventBoxes(data) {
+        while ($("#eventDirContainerList")[0].firstChild)
+            $("#eventDirContainerList")[0].removeChild($("#eventDirContainerList")[0].firstChild);
+
+
+        var count = 0;
+        var slideNum = 1;
+        var curSlide = document.createElement("ul");
+        curSlide.className = "eventDirSlide swiper-slide";
+        curSlide.id = "eventSlide" + slideNum++;
+        var today = moment();
+        data.forEach(e => {
+            // if (moment(e.Start).isSame(today, 'day') === false)
+            //     return;
+            if (count == 9) {
+                $("#eventDirContainerList").append(curSlide);
+                curSlide = document.createElement("ul");
+                curSlide.className = "eventDirSlide swiper-slide"
+                curSlide.id = "eventSlide" + slideNum++;
+                count = 0;
+            }
+            var eventBoxContainer = document.createElement("li");
+            eventBoxContainer.className = "eventBoxContainer";
+            var eventBox = document.createElement("div");
+            eventBox.className = "eventBox";
+            var eventHeaderText = document.createElement("span");
+            eventHeaderText.className = "eventHeaderText";
+            eventHeaderText.innerText = "Event:";
+            var eventSubHeaderText = document.createElement("span");
+            eventSubHeaderText.className = "eventSubHeaderText";
+            eventSubHeaderText.innerText = e.EventName;
+            var eventRoomHeaderText = document.createElement("span");
+            eventRoomHeaderText.className = "eventRoomHeaderText";
+            eventRoomHeaderText.innerText = "Room:";
+            var eventRoomSubHeaderText = document.createElement("span");
+            eventRoomSubHeaderText.className = "eventRoomSubHeaderText";
+            eventRoomSubHeaderText.innerText = e.RoomDescription
+
+            var eventRoomHeaderDateLabel = document.createElement("span");
+            eventRoomHeaderDateLabel.className = "eventRoomHeaderDateLabel";
+            eventRoomHeaderDateLabel.innerText = "Date:";
+
+            var eventRoomSubHeaderDate = document.createElement("span");
+            eventRoomSubHeaderDate.className = "eventRoomSubHeaderDate";
+            startSplit = e.Start.split("-")
+            eventRoomSubHeaderDate.innerText = startSplit[1] + "/" + startSplit[2].substr(0, 2)
+
+            eventBox.append(eventHeaderText);
+            eventBox.append(eventSubHeaderText);
+            eventBox.append(eventRoomHeaderText);
+            eventBox.append(eventRoomSubHeaderText);
+            eventBox.append(eventRoomHeaderDateLabel);
+            eventBox.append(eventRoomSubHeaderDate);
+
+
+            var eventBar = document.createElement("div");
+            eventBar.className = "eventBar";
+            var eventTimeText = document.createElement("span");
+            eventTimeText.className = "eventTimeText";
+            eventTimeText.innerText = moment(e.Start).format("h:mm A") + " - " + moment(e.End).format("h:mm A");
+
+            eventBar.append(eventTimeText);
+
+            var eventMap = document.createElement("div");
+            eventMap.className = "eventMap";
+            eventMap.data = e;
+            var eventMapText = document.createElement("div");
+            eventMapText.className = "eventMapText";
+            eventMapText.innerText = "MAP IT";
+
+            eventMap.append(eventMapText);
+
+            eventBoxContainer.append(eventBox);
+            eventBoxContainer.append(eventBar);
+            eventBoxContainer.append(eventMap);
+
+            curSlide.append(eventBoxContainer);
+
+            count++;
+        });
+        $("#eventDirContainerList").append(curSlide);
+
+        $(".eventMap").click(function() {
+            console.log(this.data);
+
+            //ADD FEATURE TO MAP TO DESTINATION HERE
+            //can use this.data to find the location
+
+            $("#aab_buttn").click();
+            getRoute(this.data.RoomDescription.split(" ")[1].replace(/-/g, ""));
+
+        });
+        eventsSwiper = new Swiper('#eventDirContainer', {
+            slidesPerView: 1,
+            initialSlide: 0,
+            observer: true,
+            observeParents: true,
+            spaceBetween: 100,
+            on: {
+                init: function() {
+                    // if (this.visibleSlides == 0 || this.visibleSlides == undefined)
+                    //     this.visibleSlides = this.slides.length;
+                    // $("#eventsPage .leftArrows").hide();
+                    // $("#eventsPage .prevPageBtn").css("opacity", "0.4");
+                    // if (this.slides.length <= 1) {
+                    //     $("#eventsPage .rightArrows").hide();
+                    //     $("#eventsPage .nextPageBtn").css("opacity", "0.4");
+                    $("#eventPageNumText").html("PAGE 1 of " + $(".eventDirSlide").length);
+                    console.log(this);
+                    // }
+                    console.log('swiper initialized');
+                },
+                slideChange: function() {
+                    // activeIndex = this.realIndex * 24;
+                    // if (this.visibleSlides == 0)
+                    //     this.visibleSlides = this.slides.length;
+                    $("#eventPageNumText").html("PAGE " + (this.realIndex + 1) + " of " + this.slides.length);
+                    // if (this.visibleSlides <= 1) {
+                    //     $("#eventsPage .leftArrows").hide();
+                    //     $("#eventsPage .rightArrows").hide();
+                    //     $("#eventsPage .prevPageBtn").css("opacity", "0.4");
+                    //     $("#eventsPage .nextPageBtn").css("opacity", "0.4");
+                    // } else {
+                    //     $("#eventsPage .leftArrows").show();
+                    //     $("#eventsPage .rightArrows").show();
+                    //     $("#eventsPage .prevPageBtn").css("opacity", "1");
+                    //     $("#eventsPage .nextPageBtn").css("opacity", "1");
+                    //     if (this.realIndex == 0) {
+                    //         $("#eventsPage .leftArrows").hide();
+                    //         $("#eventsPage .prevPageBtn").css("opacity", "0.4");
+                    //     }
+                    //     if (this.realIndex == this.visibleSlides - 1) {
+                    //         $("#eventsPage .rightArrows").hide();
+                    //         $("#eventsPage .nextPageBtn").css("opacity", "0.4");
+                    //     }
+                    // }
+                    // $("#eventsDirContainerList .rowA").removeClass("rowA");
+                    // $("#eventsDirContainerList").children()[this.realIndex].children[0].className += " rowA"
+                },
+                update: function() {
+                    // if ($("#eventsDirContainerList .swiper-slide-next").css("display") !== undefined && $("#eventsDirContainerList .swiper-slide-next").css("display").indexOf("none") > -1)
+                    //     this.allowSlideNext = false;
+                    // else
+                    //     this.allowSlideNext = true;
+                    // $("#eventsPage .leftArrows").hide();
+                    // $("#eventsPage .prevPageBtn").css("opacity", "0.4");
+                    // if (this.visibleSlides <= 1) {
+                    //     $("#eventsPage .rightArrows").hide();
+                    //     $("#eventsPage .nextPageBtn").css("opacity", "0.4");
+                    // } else {
+                    //     $("#eventsPage .rightArrows").show();
+                    //     $("#eventsPage .nextPageBtn").css("opacity", "1");
+                    // }
+                },
+                slideChangeTransitionStart: function() {
+                    // if ($("#eventsDirContainerList .swiper-slide-next").css("display") !== undefined && $("#eventsDirContainerList .swiper-slide-next").css("display").indexOf("none") > -1)
+                    //     this.allowSlideNext = false;
+                    // else
+                    //     this.allowSlideNext = true;
+                }
+            }
+        });
+    }
+
+    function createEventDir() {
+        var dataSource = "AAB"
+        if (currentBuilding == "TB") {
+            dataSource = "TB"
+        }
+        //"php/get_events_" + dataSource + ".php"
+        fetch("data/json_" + dataSource + ".json").then(res => res.json()).then(data => {
+
+            data.Events.sort(function(a, b) {
+                if (moment(b.Start).diff(moment(a.Start)) <= 0)
+                    return 1;
+                else
+                    return -1;
+            });
+
+            createEventBoxes(data.Events);
+        });
+    }
+
+    var myTemp;
+    var myIcon;
+
+    function getWeather() {
+        $.ajax({
+            type: "GET",
+            url: "php/weather.php",
+            dataType: "xml",
+            success: function(xml) {
+                    myTemp = $(xml).find("accuWx\\:temperature").text();
+                    myIcon = $(xml).find("accuWx\\:weathericon").text();
+
+                    //weather-temp
+                    $("#tempContainer").html(myTemp + '&deg;');
+                    $("#weatherIcon").attr("src", "http://api.accuweather.com/developers/Media/Default/WeatherIcons/" + myIcon + "-s.png");
+                } // end success function of xml read
+        }); // end .ajax call for weather information
+    }
+
+    function getDate() {
+        $("#dayContainer").text(moment().format('dddd'));
+        $("#dateContainer").text(moment().format('MMMM D, YYYY'));
+    }
+
+    setInterval(function() {
+        getWeather();
+        getDate();
+    }, 60000);
+
+    getWeather();
+    getDate();
+    createEventDir();
+    displayScreen("campus");
+</script>
+<script>
+    const Keyboard = {
+    elements: {
+        main: null,
+        keysContainer: null,
+        keys: []
+    },
+
+    eventHandlers: {
+        oninput: null,
+        onclose: null
+    },
+
+    properties: {
+        value: "",
+        capsLock: true
+    },
+
+    init() {
+        // Create main elements
+        this.elements.main = document.createElement("div");
+        this.elements.keysContainer = document.createElement("div");
+
+        // Setup main elements
+        this.elements.main.classList.add("keyboard", "keyboard--hidden");
+        this.elements.keysContainer.classList.add("keyboard__keys");
+        this.elements.keysContainer.appendChild(this._createKeys());
+
+        this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
+
+        // Add to DOM
+        this.elements.main.appendChild(this.elements.keysContainer);
+        document.body.appendChild(this.elements.main);
+
+        // Automatically use keyboard for elements with .use-keyboard-input
+        document.querySelectorAll(".use-keyboard-input").forEach(element => {
+            element.addEventListener("focus", () => {
+                this.open(element.value, currentValue => {
+                    element.value = currentValue;
+                });
+            });
+        });
+    },
+
+    _createKeys() {
+        const fragment = document.createDocumentFragment();
+        const keyLayout = [
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "A", "backspace", "done", 
+        ];
+
+        // Creates HTML for an icon
+        const createIconHTML = (icon_name) => {
+            return `<i class="material-icons">${icon_name}</i>`;
+        };
+
+        keyLayout.forEach(key => {
+            const keyElement = document.createElement("button");
+            const insertLineBreak = ["A"].indexOf(key) !== -1;
+
+            // Add attributes/classes
+            keyElement.setAttribute("type", "button");
+            keyElement.classList.add("keyboard__key");
+
+            switch (key) {
+                case "backspace":
+                    keyElement.classList.add("keyboard__key--wide");
+                    keyElement.innerHTML = createIconHTML("backspace");
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "done":
+                    keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
+                    keyElement.innerHTML = createIconHTML("check_circle");
+
+                    keyElement.addEventListener("click", () => {
+                        this.close();
+                        this._triggerEvent("onclose");
+                    });
+
+                    break;
+
+                default:
+                    keyElement.textContent = key.toUpperCase();
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+            }
+
+            fragment.appendChild(keyElement);
+
+            if (insertLineBreak) {
+                fragment.appendChild(document.createElement("br"));
+            }
+        });
+
+        return fragment;
+    },
+
+    _triggerEvent(handlerName) {
+        if (typeof this.eventHandlers[handlerName] == "function") {
+            this.eventHandlers[handlerName](this.properties.value);
+        }
+    },
+
+    _toggleCapsLock() {
+        this.properties.capsLock = !this.properties.capsLock;
+
+        for (const key of this.elements.keys) {
+            if (key.childElementCount === 0) {
+                key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
+            }
+        }
+    },
+
+    open(initialValue, oninput, onclose) {
+        this.properties.value = initialValue || "";
+        this.eventHandlers.oninput = oninput;
+        this.eventHandlers.onclose = onclose;
+        this.elements.main.classList.remove("keyboard--hidden");
+    },
+
+    close() {
+        this.properties.value = "";
+        this.eventHandlers.oninput = oninput;
+        this.eventHandlers.onclose = onclose;
+        this.elements.main.classList.add("keyboard--hidden");
+    }
+};
+
+window.addEventListener("DOMContentLoaded", function () {
+    Keyboard.init();
+});
+
+</script>
+<script>
+    function myfun(str){
+        var modal = document.getElementById('myModal');
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var button = document.getElementById('btn');
+        var modalImg = document.getElementById("img01");
+        modal.style.display = "block";
+        modalImg.src = "/photoshop/"+str+".png";
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("close");
+
+    // When the user clicks on <span> (x), close the modal
+    function closefun() {
+        var modal = document.getElementById('myModal');
+        modal.style.display = "none";
+    }
+    function textFun(){
+        var temp = document.getElementById('roomNo').value;
+        room = parseInt(temp);
+        if((room == 209 && (temp == '209A' || temp == '209')) ||(room == 211 && (temp == '211A' || temp == '211'))){
+            myfun(temp);
+            document.getElementById('roomNo').value = "";
+        }
+        
+        else if(((room >= 101 && room <= 123) || (room >= 201 && room <= 217 && room != 209 && room != 211) || (room >= 301 && room <= 316) || (room >= 401 && room <= 424)) && temp.length == 3){
+            myfun(temp);
+            document.getElementById('roomNo').value = "";
+        }
+        else{
+            document.getElementById('exampleModal').style.display = "block";
+            document.getElementById('roomNo').value = "";
+        }
+    }
+</script>

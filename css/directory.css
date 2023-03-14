@@ -1,0 +1,256 @@
+#donorHeaderContainer {
+    position: absolute;
+    top: 280px;
+    left: 103px;
+    width: 880px;
+    height: 168px;
+    background: #F2F2F2;
+}
+
+#alumniHeaderContainer {
+    position: absolute;
+    top: 280px;
+    left: 103px;
+    width: 880px;
+    height: 168px;
+    background: #F2F2F2;
+}
+
+#donorDirHeader {
+    position: absolute;
+    /* top: 342px; */
+    top: 37px;
+    text-align: center;
+    width: 100%;
+    color: #660000;
+    font-size: 40px;
+    font-family: FuturaStd-Book;
+}
+
+#donorDirSubHeader {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 90px;
+    font-size: 26px;
+    font-family: FuturaBT-Medium;
+    color: #660000;
+}
+
+#alumniDirHeader {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #660000;
+    font-size: 40px;
+    font-family: FuturaStd-Book;
+    width: 100%;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+#donorDirContainer {
+    position: absolute;
+    top: 449px;
+    left: 103px;
+    width: 880px;
+    max-height: 1290px;
+    background: rgba(242, 242, 242, 1);
+    font-size: 0;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+}
+
+#donorDirContainer::-webkit-scrollbar {
+    display: none;
+}
+
+#alumniDirContainer {
+    position: absolute;
+    top: 449px;
+    left: 103px;
+    width: 880px;
+    max-height: 1290px;
+    background: rgba(242, 242, 242, 1);
+    font-size: 0;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+}
+
+#alumniDirContainer::-webkit-scrollbar {
+    display: none;
+}
+
+#endowmentDirContainer {
+    position: absolute;
+    top: 544px;
+    left: 47px;
+    height: 1195px;
+    width: 988px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    font-size: 0;
+}
+
+#endowmentDirContainer::-webkit-scrollbar {
+    display: none;
+}
+
+#endowmentDirContainer .rowE,
+#endowmentDirContainer .rowO {
+    display: inline-block;
+    position: relative;
+    width: 988px;
+    min-height: 120px;
+    background: white;
+    font-size: 25px;
+    font-family: FuturaBT-Medium;
+    color: #660000;
+    margin-bottom: 17.5px;
+}
+
+#alumniDirContainer .rowE {
+    background: rgba(102, 0, 0, 1);
+    color: #CCCCCC;
+}
+
+#donorDirContainer .rowE {
+    background: rgba(102, 0, 0, 1);
+    color: #CCCCCC;
+}
+
+#alumniDirContainer .rowO {
+    background: rgba(204, 204, 204, 1);
+    color: #660000;
+}
+
+#donorDirContainer .rowO {
+    background: rgba(204, 204, 204, 1);
+    color: #660000;
+}
+
+#alumniDirContainer .rowA {
+    background: white;
+    color: #660000;
+}
+
+#donorDirContainer .rowA {
+    background: white;
+    color: #660000;
+    /* color: black; */
+}
+
+#oldMainRowContainer .rowA {
+    background: rgba(204, 204, 204, 1);
+    color: #660000;
+}
+
+#legacyRowContainer .rowA {
+    background: rgba(204, 204, 204, 1);
+    color: #660000;
+}
+
+#endowmentDirContainer .rowA {
+    background: rgba(204, 204, 204, 1);
+    ;
+    /* color: black; */
+}
+
+#alumniDirContainer .rowE,
+#alumniDirContainer .rowO {
+    display: inline-block;
+    position: relative;
+    font-size: 25px;
+    font-family: FuturaStd-Heavy;
+    width: 100%;
+    line-height: 57px;
+}
+
+#donorDirContainer .rowE,
+#donorDirContainer .rowO {
+    display: inline-block;
+    /* position: relative; */
+    font-size: 25px;
+    font-family: FuturaStd-Heavy;
+    width: 100%;
+    line-height: 57px;
+    text-align: center;
+}
+
+#endowmentDirContainer .pic {
+    position: absolute;
+    top: 7.5px;
+    left: 40px;
+    width: 105px;
+    height: 105px;
+}
+
+#endowmentDirContainer .endowment {
+    position: absolute;
+    top: 7.5px;
+    left: 169px;
+}
+
+#endowmentDirContainer .info {
+    position: absolute;
+    top: 46px;
+    left: 189px;
+    width: 72%;
+    font-size: 20px;
+    font-family: FuturaStd-Medium;
+    color: black;
+}
+
+#endowmentDirContainer .info ul {
+    list-style-type: disc;
+}
+
+#endowmentDirContainer .arrow {
+    position: absolute;
+    top: 32.5px;
+    left: 918px;
+}
+
+#donorDirContainer .name {
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+}
+#donorDirContainer .sort {
+    display:none;
+}
+#donorDirContainer .info {
+    position: absolute;
+    left: 778px;
+    margin-top: 8.5px;
+}
+
+#alumniDirContainer .year {
+    display: inline-block;
+    width: 25%;
+    /* vertical-align: middle; */
+    text-align: center;
+    /* position: absolute; */
+    /* left: 75px; */
+}
+
+#alumniDirContainer .name {
+    display: inline-block;
+    width: 50%;
+    /* vertical-align: middle; */
+    text-align: center;
+}
+
+#alumniDirContainer .info {
+    position: absolute;
+    top: 8.5px;
+    left: 718px;
+}
+
+#video {
+    position: absolute;
+    top: 286px;
+    left: 50px;
+    width: 980px;
+}
